@@ -16,15 +16,16 @@ times = soup.find_all('div',class_="timestamp")
 h,m,s=0,0,0
 
 for time in times:
-    a,b=map(int,time.get_text().split(':'))
-    m+=a;s+=b
+    if(time.get_text().count(':')==2):
+        c,b,a =map(int,time.get_text().split(':'))
+        h+=c
+    else:
+        b,a=map(int,time.get_text().split(':'))
+    m+=b;s+=a
 
-n =(m*60)+s
+n = (h*3600)+(m*60)+s
 s = n%60
 m = (n%3600)//60
 h = n//3600
 
 print('총 재생시간 : {}:{}:{}'.format(h,m,s))
-
-#    print('time:{0:10s}'.format(time[text]))
-#    print('title:{0:10s} link:{1:20s}\n'.format(title['title'], title['href']))
